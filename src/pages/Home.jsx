@@ -4,7 +4,7 @@ import { useSettings } from "../App";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-// ফলব্যাক বা ব্যাকআপ ডিফল্ট ডেটা (ডাটাবেজ খালি থাকলে ব্যবহারের জন্য)
+// ডাটাবেজ খালি থাকলে লোড হওয়ার জন্য ডিফল্ট ব্যাকআপ তথ্য
 const defaultServices = [
   { id: "s1", title: "ওয়েব ডিজাইন", desc: "আমাদের ওয়েব ডিজাইন ও ডেভেলপমেন্ট প্যাকেজ শুরু ৮০০০ টাকা থেকে", icon: "fas fa-globe" },
   { id: "s2", title: "সফটওয়্যার ডেভেলপমেন্ট", desc: "আমাদের সফটওয়্যার ডেভেলপমেন্ট প্যাকেজ শুরু ১০০০০ টাকা থেকে", icon: "fas fa-laptop" },
@@ -15,7 +15,7 @@ const defaultServices = [
 const defaultPackages = [
   { id: "p1", name: "স্টার্টার", price: "৩৫০০", duration: "এককালীন পেমেন্ট", features: ["১ পেজের ল্যান্ডিং পেজ", "মোবাইল ফ্রেন্ডলি ডিজাইন", "১০ জিবি ফাস্ট হোস্টিং", "১ বছরের ডোমেইন ফ্রি", "পেমেন্ট গেটওয়ে", "এসইও অপ্টিমাইজেশন"] },
   { id: "p2", name: "উদ্যোক্তা", price: "৮০০০", duration: "এককালীন পেমেন্ট", features: ["৫ পেজের ডায়নামিক ওয়েবসাইট", "প্রিমিয়াম ডিজাইন", "আনলিমিটেড হোস্টিং স্পেস", "ফ্রি .com ডোমেইন", "সোশ্যাল মিডিয়া চ্যাট বট", "১ মাসের ফ্রি সাপোর্ট"] },
-  { id: "p3", name: "বিজনেস প্রো", price: "১৮৫০০", duration: "এককালীন পেমেন্ট", features: ["ফুল ই-কমার্স সলিউশন", "ইনভেন্টরি  ম্যানেজমেন্ট", "পেমেন্ট গেটওয়ে (বিকাশ/নগদ)", "অন-পেজ এসইও (SEO)", "ফেসবুক পিক্সেল সেটআপ", "৬ মাসের ফ্রি মেইনটেনেন্স"] }
+  { id: "p3", name: "বিজনেস প্রো", price: "১৮৫০০", duration: "এককালীন পেমেন্ট", features: ["ফুল ই-কমার্স সリューション", "ইনভেন্টরি ম্যানেজমেন্ট", "পেমেন্ট গেটওয়ে (বিকাশ/নগদ)", "অন-পেজ এসইও (SEO)", "ফেসবুক পিক্সেল সেটআপ", "৬ মাসের ফ্রি মেইনটেনেন্স"] }
 ];
 
 const defaultPortfolio = [
@@ -48,7 +48,7 @@ const staticBrands = [
   { id: "b3", img: "https://www.creativedesign.com.bd/assets/images/brands/1766159831surokhha.png", url: "https://surokkhapaybd.com" },
   { id: "b4", img: "https://www.creativedesign.com.bd/assets/images/brands/1766159723astha.png", url: "https://asthaonlinnebd.shop/" },
   { id: "b5", img: "https://www.creativedesign.com.bd/assets/images/brands/1766159594eboi.png", url: "https://eboibitan.com/" },
-  { id: "b6", img: "https://www.creativedesign.com.bd/assets/images/brands/1766159017sottat.png", url: "#" },
+  { id: "b6", img: "https://www.creativedesign.com.bd/assets/images/brands/1766159017sottat.png", url: "https://web.facebook.com/p/%E0%A6%B8%E0%A6%A4%E0%A6%A4%E0%A6%BE-%E0%A6%89%E0%A6%A8%E0%A7%8D%E0%A6%A8%E0%A6%AF%E0%A6%BC%E0%A6%A8-%E0%A6%AB%E0%A7%8B%E0%A6%B0%E0%A6%BE%E0%A6%AE-100067069501902" },
   { id: "b7", img: "https://www.creativedesign.com.bd/assets/images/brands/1766158843doinik-jonatar-bngaladesh.png", url: "https://www.dailyjanatarbangladesh.com/" },
   { id: "b8", img: "https://www.creativedesign.com.bd/assets/images/brands/1766158648phakal.png", url: "https://phakal.edu.bd" }
 ];
@@ -61,10 +61,10 @@ export default function Home() {
   const [dbTestimonials, setTestimonials] = useState([]);
   const [dbTeam, setTeam] = useState([]);
   
-  // পোর্টফোলিও ক্যাটাগরি ফিল্টার স্টেট
+  // পোর্টফোলিও ফিল্টার স্টেট
   const [activeFilter, setActiveFilter] = useState("*");
 
-  // ফায়ারস্টোর ডাটাবেজ থেকে ডাটা লোড
+  // ফায়ারস্টোর থেকে ডাটা লোড করা হচ্ছে
   useEffect(() => {
     const fetchCollection = async (colName, setter) => {
       try {
@@ -84,12 +84,11 @@ export default function Home() {
     fetchCollection("team", setTeam);
   }, []);
 
-  // ডাটা রেন্ডার শেষ হওয়ার পর জেকোয়েরি স্লাইডারগুলো ট্র্রিগার করা
+  // ডাটা রেন্ডার শেষ হওয়ার পর জেকোয়েরি স্লাইডারগুলো সক্রিয় করা
   useEffect(() => {
     const timer = setTimeout(() => {
       const $ = window.$;
       if ($ && typeof $.fn.owlCarousel === "function") {
-        // পুরনো স্লাইডার ইন্স্ট্যান্স থাকলে তা ডেস্ট্রয় করা হচ্ছে
         $(".owl-carousel").trigger('destroy.owl.carousel');
 
         // ব্র্যান্ড স্লাইডার
@@ -127,19 +126,17 @@ export default function Home() {
           responsive: { 0: { items: 1 }, 600: { items: 2 }, 1000: { items: 4 } }
         });
       }
-    }, 800); // ৮০০ মিলি-সেকেন্ড অপেক্ষা করবে রেন্ডারিং সিকিউর করার জন্য
+    }, 800);
 
     return () => clearTimeout(timer);
   }, [dbTestimonials, dbTeam]);
 
-  // ডাইনামিক ডেটা চেক ও অ্যাসাইনমেন্ট
   const displayServices = dbServices.length > 0 ? dbServices : defaultServices;
   const displayPortfolios = dbPortfolios.length > 0 ? dbPortfolios : defaultPortfolio;
   const displayPackages = dbPackages.length > 0 ? dbPackages : defaultPackages;
   const displayTestimonials = dbTestimonials.length > 0 ? dbTestimonials : defaultTestimonials;
   const displayTeam = dbTeam.length > 0 ? dbTeam : defaultTeam;
 
-  // পোর্টফোলিও ক্লায়েন্ট সাইড ফিল্টারিং
   const filteredPortfolios = activeFilter === "*" 
     ? displayPortfolios 
     : displayPortfolios.filter(item => item.category === activeFilter);
@@ -181,7 +178,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ৩. আমাদের সেবা (Services) */}
+      {/* ৩. আমাদের সেবা */}
       <section id="services" className="py-5 bg-light">
         <div className="container">
           <div className="text-center mb-5">
@@ -214,21 +211,21 @@ export default function Home() {
           </div>
           <div className="row align-items-center justify-content-center">
             {displayPackages.map((pkg, idx) => {
-              const isPopular = idx === 1; // ২য় প্যাকেজটিকে (উদ্যোক্তা) হাইলাইটেড করা হবে
+              const isPopular = idx === 1;
               return (
                 <div className="col-lg-4 col-md-6 mb-4" key={pkg.id}>
                   <div className={`pricing-card ${isPopular ? "popular" : ""}`}>
                     {isPopular && <div className="popular-badge">BEST VALUE</div>}
                     <div className="pricing-header">
                       <h4 className="fw-bold">{pkg.name}</h4>
-                      <div className="price-value">
+                      <div className="price-value" style={{ fontSize: "3rem", fontWeight: "800", color: "#ff6b00" }}>
                         <span className="currency">৳</span>{pkg.price}
                       </div>
                       <span className="duration">{pkg.duration}</span>
                     </div>
                     <ul className="pricing-features">
                       {pkg.features && pkg.features.map((feat, i) => (
-                        <li key={i}><i className="fas fa-check"></i> {feat}</li>
+                        <li key={i} className="mb-3" style={{ display: "flex", alignItems: "center" }}><i className="fas fa-check" style={{ color: "#28a745", background: "#e8f5e9", padding: "5px", borderRadius: "50%", marginRight: "10px" }}></i> {feat}</li>
                       ))}
                     </ul>
                     <a href={`https://wa.me/${settings.whatsapp || '8801854123433'}?text=Hello! আমি ${pkg.name} প্যাকেজটি নিতে চাই।`} 
@@ -303,7 +300,6 @@ export default function Home() {
             <div style={{ width: "60px", height: "3px", background: "#ff6b00", margin: "15px auto" }}></div>
           </div>
 
-          {/* ফিল্টার মেনু */}
           <div className="portfolio-menu">
             <button className={activeFilter === "*" ? "active" : ""} onClick={() => setActiveFilter("*")}>সকল</button>
             <button className={activeFilter === "web-dijan" ? "active" : ""} onClick={() => setActiveFilter("web-dijan")}>ওয়েব ডিজান</button>
@@ -311,7 +307,6 @@ export default function Home() {
             <button className={activeFilter === "esioo" ? "active" : ""} onClick={() => setActiveFilter("esioo")}>এসইও</button>
           </div>
 
-          {/* পোর্টফোলিও গ্রিড */}
           <div className="row">
             {filteredPortfolios.map((p) => (
               <div className="col-lg-3 col-md-6 col-sm-12 mb-4" key={p.id}>
@@ -336,7 +331,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ৭. কাস্টমার টেস্টিমোনিয়াল */}
+      {/* ৭. প্রশংসাপত্র */}
       <section id="testimonials" className="testimonial-section py-5">
         <div className="container">
           <div className="text-center mb-5">
@@ -370,7 +365,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ৮. স্ট্যাটস কাউন্টার */}
+      {/* ৮. স্ট্যাটস */}
       <section className="stats-section text-center py-5">
         <div className="container">
           <div className="row">
@@ -394,7 +389,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ৯. টিম মেম্বার স্লাইডার */}
+      {/* ৯. আমাদের টিম */}
       <section id="team" className="team-section py-5">
         <div className="container">
           <div className="text-center mb-5">
@@ -407,17 +402,17 @@ export default function Home() {
             {displayTeam.map((m) => (
               <div className="item" key={m.id}>
                 <div className="team-card">
-                  <div className="team-img-wrapper">
-                    <img src={m.image || "https://placehold.co/300x300"} className="team-img" alt={m.name} />
-                    <div className="team-social-overlay">
-                      <a href="https://web.facebook.com/official.creativedesign" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
-                      <a href="https://web.facebook.com/official.creativedesign" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
-                      <a href="https://web.facebook.com/official.creativedesign" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+                  <div className="team-img-wrapper" style={{ height: "280px", width: "100%" }}>
+                    <img src={m.image || "https://placehold.co/300x300"} className="team-img" alt={m.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", transition: "transform 0.5s ease" }} />
+                    <div className="team-social-overlay" style={{ position: "absolute", bottom: "-60px", left: 0, width: "100%", background: "rgba(255, 107, 0, 0.9)", textAlign: "center", padding: "12px 0", transition: "all 0.3s ease" }}>
+                      <a href="https://web.facebook.com/official.creativedesign" target="_blank" rel="noopener noreferrer" style={{ color: "white", margin: "0 10px", fontSize: "18px" }}><i className="fab fa-facebook-f"></i></a>
+                      <a href="https://web.facebook.com/official.creativedesign" target="_blank" rel="noopener noreferrer" style={{ color: "white", margin: "0 10px", fontSize: "18px" }}><i className="fab fa-linkedin-in"></i></a>
+                      <a href="https://web.facebook.com/official.creativedesign" target="_blank" rel="noopener noreferrer" style={{ color: "white", margin: "0 10px", fontSize: "18px" }}><i className="fab fa-twitter"></i></a>
                     </div>
                   </div>
-                  <div className="team-info">
-                    <h5 className="team-name">{m.name}</h5>
-                    <span className="team-designation">{m.designation}</span>
+                  <div className="team-info" style={{ padding: "25px 20px", textAlign: "center" }}>
+                    <h5 className="team-name" style={{ fontWeight: "700", fontSize: "1.2rem", color: "#333", marginBottom: "5px" }}>{m.name}</h5>
+                    <span className="team-designation" style={{ color: "#ff6b00", fontSize: "0.9rem", fontWeight: "600", textTransform: "uppercase", letterSpacing: "1px" }}>{m.designation}</span>
                   </div>
                 </div>
               </div>
@@ -426,7 +421,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ১০. ব্র্যান্ড পার্টনার স্লাইডার */}
+      {/* ১০. ব্র্যান্ড স্লাইডার */}
       <section className="brand-section py-5">
         <div className="container">
           <div className="text-center mb-4">
@@ -444,7 +439,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ১১. কল টু অ্যাকশন ব্যানার */}
+      {/* ১১. কল টু অ্যাকশন */}
       <section className="py-5 text-center" style={{ background: "var(--primary-color)", color: "white" }}>
         <div className="container">
           <h2 className="fw-bold mb-3">আজই আপনার ওয়েবসাইট তৈরি করুন</h2>
@@ -461,4 +456,4 @@ export default function Home() {
       </section>
     </div>
   );
-}
+   }
