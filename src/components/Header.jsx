@@ -13,10 +13,10 @@ export default function Header() {
   };
 
   return (
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
+    <nav className="navbar navbar-expand-lg sticky-top">
+        <div className="container">
             {/* ডাইনামিক লোগো ও ব্র্যান্ডিং সেকশন */}
-            <Link class="navbar-brand" to="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
+            <Link className="navbar-brand" to="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
                 {settings.navbarLogo ? (
                     // যদি এডমিন প্যানেলে লোগো আপলোড করা থাকে তবে সেটি দেখাবে
                     <img src={settings.navbarLogo} alt={settings.siteName || "Logo"} style={{ height: "40px", objectFit: "contain" }} />
@@ -31,7 +31,7 @@ export default function Header() {
                             display: "flex", 
                             alignItems: "center", 
                             justifyContent: "center", 
-                            border-radius: "12px", 
+                            borderRadius: "12px", // সংশোধন করা হয়েছে (camelCase)
                             fontWeight: "900", 
                             fontSize: "22px", 
                             boxShadow: "0 4px 12px rgba(255, 107, 0, 0.25)", 
@@ -53,22 +53,22 @@ export default function Header() {
             </Link>
 
             {/* মোবাইল মেনু টগল বাটন */}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
-                        <Link class="nav-link" to="/">হোম</Link>
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav ms-auto align-items-center">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/">হোম</Link>
                     </li>
                     
                     {/* সম্পর্কে সাব-মেনু */}
-                    <li class="nav-item has-submenu">
-                        <a class="nav-link" href="#" onClick={(e) => e.preventDefault()}>
-                            সম্পর্কে <i class="fas fa-angle-down submenu-arrow"></i>
+                    <li className="nav-item has-submenu">
+                        <a className="nav-link" href="#" onClick={(e) => e.preventDefault()}>
+                            সম্পর্কে <i className="fas fa-angle-down submenu-arrow"></i>
                         </a>
-                        <ul class="submenu">
+                        <ul className="submenu">
                             <li><Link to="/about">আমাদের সম্পর্কে</Link></li>
                             <li><Link to="/service">আমাদের সার্ভিস</Link></li>
                             <li><Link to="/themes">আমাদের প্রোডাক্ট</Link></li>
@@ -77,27 +77,28 @@ export default function Header() {
                             <li><Link to="/team">আমাদের টিম</Link></li>
                         </ul>
                     </li>
-          
-                    <li class="nav-item">
-                        <Link class="nav-link" to="/contact">যোগাযোগ</Link>
+              
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/contact">যোগাযোগ</Link>
                     </li>
-          
+              
                     {/* ভাষা পরিবর্তন করার গুগল অনুবাদক ড্রপডাউন */}
-                    <li class="nav-item dropdown ms-2">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "inherit", fontWeight: 500 }}>
-                            <i class="fas fa-language" style={{ fontSize: "1.1rem" }}></i>
+                    <li className="nav-item dropdown ms-2">
+                        <a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "inherit", fontWeight: 500 }}>
+                            <i className="fas fa-language" style={{ fontSize: "1.1rem" }}></i>
                             <span>ভাষা</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="langDropdown">
+                        
+                        <ul className="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="langDropdown">
                             <li>
-                                <button class="dropdown-item d-flex align-items-center py-2" onClick={() => handleLangChange('bn')} style={{ border: "none", background: "none", width: "100%" }}>
-                                    <img src="https://flagcdn.com/w20/bd.png" alt="BD" class="me-2" style={{ width: "18px" }} /> 
+                                <button className="dropdown-item d-flex align-items-center py-2" onClick={() => handleLangChange('bn')} style={{ border: "none", background: "none", width: "100%" }}>
+                                    <img src="https://flagcdn.com/w20/bd.png" alt="BD" className="me-2" style={{ width: "18px" }} /> 
                                     বাংলা
                                 </button>
                             </li>
                             <li>
-                                <button class="dropdown-item d-flex align-items-center py-2" onClick={() => handleLangChange('en')} style={{ border: "none", background: "none", width: "100%" }}>
-                                    <img src="https://flagcdn.com/w20/us.png" alt="US" class="me-2" style={{ width: "18px" }} /> 
+                                <button className="dropdown-item d-flex align-items-center py-2" onClick={() => handleLangChange('en')} style={{ border: "none", background: "none", width: "100%" }}>
+                                    <img src="https://flagcdn.com/w20/us.png" alt="US" className="me-2" style={{ width: "18px" }} /> 
                                     English
                                 </button>
                             </li>
@@ -105,13 +106,13 @@ export default function Header() {
                     </li>
 
                     {/* ফ্রি পরামর্শ বাটন (নতুন হোয়াটসঅ্যাপ নাম্বারের সাথে লিংকড) */}
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <a href={`https://wa.me/${settings.whatsapp || '8801854123433'}?text=Hello! আমি আপনাদের সার্ভিসের বিষয়ে কথা বলতে চাই।`} 
                            target="_blank" 
                            rel="noopener noreferrer" 
-                           class="btn btn-custom ms-3 d-flex align-items-center gap-2"
+                           className="btn btn-custom ms-3 d-flex align-items-center gap-2"
                         >
-                            <i class="fab fa-whatsapp" style={{ fontSize: "1.2rem" }}></i>
+                            <i className="fab fa-whatsapp" style={{ fontSize: "1.2rem" }}></i>
                             ফ্রি পরামর্শ
                         </a>
                     </li>
@@ -120,4 +121,4 @@ export default function Header() {
         </div>
     </nav>
   );
-}
+                      }
