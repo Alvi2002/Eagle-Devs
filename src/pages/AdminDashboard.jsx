@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, auth } from "../firebase";
-import { doc, getDoc, updateDoc, collection, onSnapshot, addDoc, deleteDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, onSnapshot, addDoc, deleteDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -99,12 +99,12 @@ export default function AdminDashboard() {
   }, []);
 
   // নোটিফিকেশন অ্যালার্ট হেল্পার
-  const triggerAlert = (msg, isError = false) => {
+  const triggerAlert = (message, isError = false) => {
     if (isError) {
-      setErrorMsg(msg);
+      setErrorMsg(message);
       setTimeout(() => setErrorMsg(""), 4000);
     } else {
-      setSuccessMsg(msg);
+      setSuccessMsg(message);
       setTimeout(() => setSuccessMsg(""), 4000);
     }
   };
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
       resetState(resetValue);
       triggerAlert("নতুন তথ্য ডাটাবেজে সফলভাবে যোগ করা হয়েছে।");
     } catch (err) {
-      triggerAlert("তথ্য যোগ করতে সমস্যা হয়েছে!", true);
+      triggerAlert("정보 যোগ করতে সমস্যা হয়েছে!", true);
     }
   };
 
@@ -191,8 +191,8 @@ export default function AdminDashboard() {
           <div className="list-group shadow-sm border-0 rounded-3 overflow-hidden bg-white">
             <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "settings" ? "active text-white" : ""}`} style={activeTab === "settings" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("settings")}><i className="fas fa-cog me-2"></i> জেনারেল সেটিংস</button>
             <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "services" ? "active text-white" : ""}`} style={activeTab === "services" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("services")}><i className="fas fa-laptop me-2"></i> আমাদের সার্ভিসেস</button>
-            <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "portfolio" ? "active text-white" : ""}`} style={activeTab === "portfolio" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("portfolio")}><i className="fas fa-briefcase me-2"></i> পোর্টফোলিও গ্যালারি</button>
-            <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "packages" ? "active text-white" : ""}`} style={activeTab === "packages" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("packages")}><i className="fas fa-box-open me-2"></i> ওয়েবসাইট প্যাকেজ</button>
+            <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "portfolio" ? "active text-white" : ""}`} style={activeTab === "portfolio" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("portfolio")}><i className="fas fa-photo-video me-2"></i> পোর্টফোলিও গ্যালারি</button>
+            <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "packages" ? "active text-white" : ""}`} style={activeTab === "packages" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("packages")}><i className="fas fa-tags me-2"></i> ওয়েবসাইট প্যাকেজ</button>
             <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "themes" ? "active text-white" : ""}`} style={activeTab === "themes" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("themes")}><i className="fas fa-code me-2"></i> থিম ও প্রোডাক্ট</button>
             <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "team" ? "active text-white" : ""}`} style={activeTab === "team" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("team")}><i className="fas fa-users me-2"></i> আমাদের টিম</button>
             <button className={`list-group-item list-group-item-action border-0 py-3 ${activeTab === "testimonials" ? "active text-white" : ""}`} style={activeTab === "testimonials" ? { background: "#ff6b00" } : {}} onClick={() => setActiveTab("testimonials")}><i className="fas fa-star me-2"></i> ক্লায়েন্ট প্রশংসাপত্র</button>
@@ -465,7 +465,7 @@ export default function AdminDashboard() {
                         <div className="card-body p-3">
                           <h6 className="fw-bold mb-1 text-truncate">{t.title}</h6>
                           <div className="text-primary fw-bold mb-2">৳{t.price}</div>
-                          <p className="text-muted small text-truncate-2 mb-3" style={{ fontSize: "11px" }}>{t.desc}</p>
+                          <p className="text-muted small mb-3" style={{ fontSize: "11px" }}>{t.desc}</p>
                           <a href={t.link} target="_blank" rel="noopener noreferrer" className="btn btn-light btn-sm w-100 rounded-pill border">ডেমো দেখুন</a>
                         </div>
                         <button className="btn btn-danger btn-sm position-absolute top-2 end-2 rounded-circle" style={{ width: "30px", height: "30px", padding: 0 }} onClick={() => handleDelete("themes", t.id)}><i className="fas fa-trash-alt"></i></button>
@@ -560,7 +560,7 @@ export default function AdminDashboard() {
                           </div>
                         </div>
                         <div className="text-warning mb-2 small">{"★".repeat(parseInt(t.rating || "5"))}</div>
-                        <p className="text-muted small mb-3 italic">"{t.feedback}"</p>
+                        <p className="text-muted small mb-3">"{t.feedback}"</p>
                         <button className="btn btn-outline-danger btn-sm mt-auto" onClick={() => handleDelete("testimonials", t.id)}><i className="fas fa-trash-alt me-1"></i> ডিলিট রিভিউ</button>
                       </div>
                     </div>
