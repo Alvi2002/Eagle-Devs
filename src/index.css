@@ -1,0 +1,893 @@
+/* ==========================================
+   ১. গ্লোবাল রুট ভেরিয়েবল এবং বেসিক সেটিংস
+   ========================================== */
+:root {
+    --primary-color: #ff6b00; /* ব্র্যান্ড অরেঞ্জ */
+    --secondary-color: #0d6efd; /* এক্সেন্ট ব্লু */
+    --dark-bg: #1a1a2a;
+    --light-bg: #f8f9fa;
+    --brand-dark: #1a1a1a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hind Siliguri', sans-serif;
+    overflow-x: hidden;
+    background: var(--light-bg);
+    color: #0f172a;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+h1, h2, h3, h4, h5, p, li, th, td, label, button, input, select, textarea {
+    font: inherit;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.muted {
+    color: #64748b;
+}
+
+/* ==========================================
+   ২. নেভিগেশন বার (Navbar) এবং মেনু স্টাইলস
+   ========================================== */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: white;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #333 !important;
+    margin-right: 15px;
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+.btn-custom {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50px;
+    padding: 8px 25px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #e65c00;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.dropdown-item {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #0d6efd;
+}
+
+/* সাব-মেন্যু ট্রানজিশন এবং ড্রপডাউন */
+.has-submenu {
+    position: relative;
+}
+
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: #fff;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 999;
+    border-radius: 5px;
+}
+
+.submenu li a {
+    padding: 8px 20px;
+    display: block;
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.submenu li a:hover {
+    background: #f8f9fa;
+    color: #2d3274;
+    padding-left: 25px;
+}
+
+.has-submenu:hover .submenu {
+    display: block;
+}
+
+/* ==========================================
+   ৩. হিরো সেকশন এবং ব্যানার (Hero & Banner)
+   ========================================== */
+.hero-section {
+    padding: 80px 0;
+    background: linear-gradient(to right, #fff 50%, #f0f8ff 50%);
+    display: flex;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-img {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    transition: transform 0.3s;
+}
+
+.hero-img:hover {
+    transform: scale(1.02);
+}
+
+.about-hero, .portfolio-hero, .pricing-hero, .team-hero, .contact-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+}
+
+/* ==========================================
+   ৪. সার্ভিস কার্ড (Service Cards)
+   ========================================== */
+.service-card {
+    border: none;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    background: rgba(13, 110, 253, 0.1);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    font-size: 30px;
+    margin: 0 auto 20px;
+}
+
+.orange-hover-card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    background: #fff;
+    border-bottom: 3px solid transparent !important;
+}
+
+.orange-hover-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255, 102, 0, 0.1) !important;
+    border-bottom: 3px solid var(--primary-color) !important;
+}
+
+.icon-container {
+    width: 65px;
+    height: 65px;
+    background: rgba(255, 102, 0, 0.08);
+    color: var(--primary-color);
+    border-radius: 50%;
+    font-size: 28px;
+    transition: 0.3s;
+}
+
+.orange-hover-card:hover .icon-container {
+    background: var(--primary-color);
+    color: #fff;
+    transform: scale(1.1) rotate(5deg);
+}
+
+.card-title-text {
+    color: var(--brand-dark);
+    transition: 0.3s;
+}
+
+.orange-hover-card:hover .card-title-text {
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   ৫. প্রাইসিং কার্ড (Pricing & Package)
+   ========================================== */
+.pricing-section {
+    background-color: var(--light-bg);
+}
+
+.pricing-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    border: 1px solid #eeeeee;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--primary-color);
+}
+
+.price-tag {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.price-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.currency {
+    font-size: 1.5rem;
+    vertical-align: top;
+    font-weight: 600;
+}
+
+.duration {
+    color: #999;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.feature-list, .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.feature-list li, .pricing-features li {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-list li i, .pricing-features li i {
+    color: #28a745;
+    font-size: 1.1rem;
+    background: #e8f5e9;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.btn-pricing {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: 600;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.pricing-card.popular, .featured-card {
+    transform: scale(1.05);
+    border: 2px solid var(--primary-color);
+    background: #fffcf9;
+}
+
+.popular-badge {
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.featured-pricing {
+    border: 2.5px solid var(--primary-color) !important;
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.orange-active-btn {
+    background: var(--primary-color);
+    border-radius: 50px;
+    border: none;
+}
+
+.orange-active-btn:hover {
+    background: #e65c00;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.blue-outline-btn {
+    border: 1.5px solid #007bff;
+    color: #007bff;
+    border-radius: 50px;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.blue-outline-btn:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+/* ==========================================
+   ৬. পোর্টফোলিও সেকশন (Portfolio)
+   ========================================== */
+.portfolio-section {
+    padding: 80px 0;
+    background: #ffffff;
+}
+
+.portfolio-menu, .portfolio-filter {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.portfolio-menu button, .portfolio-filter button {
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    padding: 8px 20px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50px;
+}
+
+.portfolio-menu button:hover,
+.portfolio-menu button.active,
+.portfolio-filter button:hover,
+.portfolio-filter button.active {
+    color: #fff;
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.2);
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+.portfolio-img, .portfolio-img-box img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.portfolio-item:hover .portfolio-img,
+.portfolio-item:hover .portfolio-img-box img {
+    transform: scale(1.1);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay h5 {
+    color: #fff;
+    font-weight: 700;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+
+.portfolio-overlay p {
+    color: #ddd;
+    font-size: 14px;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay h5,
+.portfolio-item:hover .portfolio-overlay p {
+    transform: translateY(0);
+}
+
+.btn-view {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.btn-view:hover {
+    color: white;
+    background: #e65c00;
+}
+
+.text-orange {
+    color: var(--primary-color) !important;
+}
+
+/* ==========================================
+   ৭. টিম সেকশন স্টাইল (Team)
+   ========================================== */
+.team-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border: 1px solid #eee;
+    max-width: 300px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
+}
+
+.team-img-wrapper, .image-box {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+    width: 100%;
+}
+
+.team-img, .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: 0.5s;
+}
+
+.team-card:hover .team-img,
+.team-card:hover .image-box img {
+    transform: scale(1.05);
+}
+
+.team-social, .team-social-overlay, .social-overlay {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 107, 0, 0.9);
+    text-align: center;
+    padding: 12px 0;
+    transition: 0.3s;
+}
+
+.team-card:hover .team-social,
+.team-card:hover .team-social-overlay,
+.team-card:hover .social-overlay {
+    bottom: 0;
+}
+
+.team-social a, .team-social-overlay a, .social-overlay a {
+    color: white;
+    margin: 0 10px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.team-social a:hover, .team-social-overlay a:hover, .social-overlay a:hover {
+    color: #000;
+}
+
+.team-info, .info-box {
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.team-name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.team-designation {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   ৮. ক্লায়েন্ট রিভিউ (Testimonials)
+   ========================================== */
+.testimonial-section {
+    background-color: #fff8f0;
+    padding-bottom: 50px;
+}
+
+.testimonial-divider {
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.testimonial-divider::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px 20px;
+    padding-top: 60px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-top: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    border: 1px solid #ffeacc;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 107, 0, 0.1);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.testimonial-img, .client-img-wrapper {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background: #fff;
+    padding: 5px;
+}
+
+.client-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.quote-icon-bg {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 60px;
+    color: rgba(255, 107, 0, 0.05);
+    font-family: serif;
+    line-height: 1;
+}
+
+.stars {
+    color: #ffc107;
+    margin-bottom: 15px;
+}
+
+.review-text {
+    color: #666;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.client-info h5 {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.client-info small {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ==========================================
+   ৯. ব্র্যান্ড এবং স্ট্যাটস সেকশন (Brands & Stats)
+   ========================================== */
+.brand-section {
+    background-color: white;
+    padding: 50px 0;
+    border-top: 1px solid #eee;
+}
+
+.brand-logo {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.brand-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.stats-section {
+    background: var(--dark-bg);
+    color: white;
+    padding: 60px 0;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   ১০. কন্টাক্ট এবং বুকিং ফর্মস (Contact & Consultancy)
+   ========================================== */
+.info-card {
+    background: #fff;
+    border-radius: 20px;
+    transition: 0.4s;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+
+.info-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background: rgba(255, 102, 0, 0.1);
+    color: #ff6600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.custom-input {
+    border: 1px solid #eee;
+    background: #fafafa;
+    border-radius: 12px !important;
+    padding: 12px 15px;
+    transition: 0.3s;
+}
+
+.custom-input:focus {
+    background: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.05);
+}
+
+.orange-submit-btn, .orange-btn {
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.orange-submit-btn:hover, .orange-btn:hover {
+    background: #e65c00;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.icon-circle {
+    width: 65px;
+    height: 65px;
+    background: rgba(255, 102, 0, 0.08);
+    color: var(--primary-color);
+    border-radius: 50%;
+    font-size: 28px;
+    transition: 0.3s;
+}
+
+/* ==========================================
+   ১১. প্রোডাক্ট এবং থিম কার্ডস (Themes)
+   ========================================== */
+.theme-card {
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+
+.theme-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.price-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn-orange {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+}
+
+.btn-orange:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* ==========================================
+   ১২. পেজিনেশন (Pagination Styles)
+   ========================================== */
+.pagination .page-link {
+    color: #333;
+    border-radius: 50%;
+    margin: 0 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+}
+
+.pagination .active .page-link, .custom-pagination .active {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.pagination .page-link:hover {
+    background-color: #eee;
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   ১৩. ফুটার স্টাইলস (Footer)
+   ========================================== */
+footer {
+    background: #111;
+    color: #aaa;
+    padding: 50px 0 20px;
+}
+
+footer h5 {
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+footer a {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
+.social-icons a {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   ১৪. রেসপনসিভ ও মোবাইল সেটিংস (Mobile Media Queries)
+   ========================================== */
+@media (max-width: 768px) {
+    .hero-section {
+        background: white;
+        text-align: center;
+        padding: 40px 0;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-img {
+        margin-top: 30px;
+    }
+}
